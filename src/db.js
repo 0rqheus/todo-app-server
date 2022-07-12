@@ -12,7 +12,7 @@ module.exports = async () => {
         };
         const uri = process.env.MONGODB_HOST ? `mongodb://${process.env.MONGODB_HOST}:27017`: process.env.MONGODB_URI
 
-        await mongoose.connect(process.env.MONGODB_URI, connectionParams);
+        await mongoose.connect(uri, connectionParams);
         console.log("Connected to database.");
     } catch (error) {
         console.log("Could not connect to database.", error);
