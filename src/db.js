@@ -10,6 +10,8 @@ module.exports = async () => {
             useCreateIndex: true,
             useUnifiedTopology: true,
         };
+        const uri = process.env.MONGODB_HOST ? `mongodb://${process.env.MONGODB_HOST}:27017`: process.env.MONGODB_URI
+
         await mongoose.connect(process.env.MONGODB_URI, connectionParams);
         console.log("Connected to database.");
     } catch (error) {
