@@ -9,13 +9,13 @@ jobs:
       - image: cimg/base:2022.06
     steps:
       - run:
-          name: Make pull request 
+          name: Trigger e2e test pipeline 
           command: |
               curl --request POST \
-                --url https://api.github.com/repos/0rqheus/todo-app-client/pulls \
-                --header "Accept: application/vnd.github+json" \
-                --header "Authorization: token $GITHUB_TOKEN" \
-                --data '{"head":"test","base":"master"}'
+                --url https://circleci.com/api/v2/project/gh/0rqheus/todo-app-client/pipeline \
+                --header "Circle-Token: $GITHUB_TOKEN" \
+                --header "content-type: application/json" \
+                --data '{"branch":"main","parameters":{"image-name":"'$DOCKER_LOGIN"/"$CIRCLE_PROJECT_REPONAME":"0.1.<< pipeline.number >>'"}}'
 
 workflows:
   sample:
