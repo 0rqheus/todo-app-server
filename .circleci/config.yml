@@ -1,0 +1,24 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.7
+
+jobs:
+  make-pull-request:
+    docker:
+      - image: cimg/base:2022.06
+    steps:
+      - run:
+          name: Make pull request 
+          command: |
+              curl --request POST \
+                --url https://api.github.com/repos/0rqheus/todo-app-client/pulls \
+                --header "Accept: application/vnd.github+json" \
+                --header "Authorization: token $GITHUB_TOKEN" \
+                --data '{"head":"test","base":"master"}'
+
+workflows:
+  sample:
+    jobs:
+      - make-pull-request:
+          context: Secrets
