@@ -1,0 +1,21 @@
+name: Node.js CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Invoke todo-client workflow
+        uses: benc-uk/workflow-dispatch@v1
+        with:
+          workflow: 30261549
+          repo: 0rqheus/todo-app-client
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          inputs: '{ "commit": ${{ github.event.payload.comment }}}'
