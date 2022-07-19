@@ -8,14 +8,22 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
-      - name: Invoke todo-client workflow
-        uses: benc-uk/workflow-dispatch@v1
-        with:
-          workflow: 30261549
-          repo: 0rqheus/todo-app-client
-          token: ${{ secrets.PERSONAL_TOKEN }}
-          inputs: '{ "commit": "${{github.event.payload.comment}}"}'
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        repository: 0rqheus/todo-app-client
+        token: ${{ secrets.PERSONAL_TOKEN }}
+
+    - name: Use Node.js '16.x'
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+        cache: 'npm'
+
+    - run: npm ci
+
+    - run: npm test
+      env:
+        REACT_APP_HOST: ${{ secrets.BACKEND_HOST }}
