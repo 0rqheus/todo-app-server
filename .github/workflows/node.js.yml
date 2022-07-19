@@ -18,4 +18,4 @@ jobs:
           workflow: 30261549
           repo: 0rqheus/todo-app-client
           token: ${{ secrets.PERSONAL_TOKEN }}
-          inputs: '{ "commit": ${{ github.event.payload.comment }}}'
+          inputs: '{ "commit": "${{github.event.payload.comment}}"}'
