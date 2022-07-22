@@ -43,4 +43,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD  }}
           port: ${{ secrets.PORT }}
-          script: cd ./trade-bot/ && redeploy.sh
+          script: cd ./trade-bot/ && ./redeploy.sh
