@@ -31,7 +31,11 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-
+    
+  redeploy_service:
+    name: Redeploy server
+    runs-on: ubuntu-latest
+    steps:
       - name: Redeploy server
         uses: appleboy/ssh-action@master
         with:
@@ -39,4 +43,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD  }}
           port: ${{ secrets.PORT }}
-          script: ./trade-bot/redeploy
+          script: cd ./trade-bot/ && redeploy.sh
