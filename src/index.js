@@ -13,6 +13,10 @@ app.use(express.json());
 app.use(cors());
 app.use("/api/tasks", tasks);
 
+app.get('/', (req, res) => {
+  res.send('Hello!');
+})
+
 // app.get('/mongodb', (req, res) => {
 //   res.send(process.env.MONGODB_HOST)
 // })
